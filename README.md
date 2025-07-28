@@ -6,6 +6,7 @@
 - Priority was given to code maintainability
 
 ## Notable Features :
+- Total runtime of O(n log n) where n is the total number of order
 - Multi-threaded Producer Consumer Model
 - Trade matching engine using bids and asks multimap structures
 - Optional logging as a CSV output
@@ -33,7 +34,7 @@
 ## Code reasonings 
 ### std::multimap
 purpose - maintain order of bids and asks\n
-**why multimap?**\n
+**why multimap?**
 - maintains order based on price of bids and asks
 - supports duplicate price
 - eliminate need for linear search, all process is done under O(log n)
@@ -41,14 +42,14 @@ purpose - maintain order of bids and asks\n
 
 ### std::ThreadSafe<Order>
 purpose - store orders from producers until consumer can process them, acting essntially as a buffer.\n
-**why std::queue?**\n
+**why std::queue?**
 - keep processes in O(1)
 - push is O(1) and pop is O(1)
 - FIFO structure (First In First Out) ideal for producer consumer
 
 ### std::stringstream localBuffer
 purpose - single thread buffer for log data to avoid locking every log write.\n
-**why stringstream?**\n
+**why stringstream?**
 - Logging to disk is slow.
 - Buffering avoids the need to lock std::ofstream so frequently.
 - Lock once per thread to flush buffer.
