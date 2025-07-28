@@ -7,6 +7,7 @@
 //OrderBook Type which introduces addOrder and matchOrder functions
 class OrderBook {
     //inaccessible outside this file
+    //multimap used to keep runtime at O(log n)
     private :
     std::multimap<double, Order, std::greater<double>> bids;
 
@@ -31,7 +32,7 @@ class OrderBook {
     }
 
     //main function to compare Orders
-    void matchOrder (){
+    void matchOrder (size_t& tradecount){
         std::lock_guard<std::mutex> lock(mut);
 
         while (!bids.empty() && !asks.empty()){
@@ -42,7 +43,7 @@ class OrderBook {
                 int qty = std::min(highestBid->second.quantity, lowestAsks->second.quantity);
                 double tradePrice = lowestAsks->first;
 
-                std::cout << "TRADE : " << qty << " @ $ " << tradePrice << std::endl;
+                tradecount++;
 
                 highestBid->second.quantity -= qty;
                 lowestAsks->second.quantity -= qty;

@@ -15,8 +15,8 @@ class OrderGenerator {
     //constructor to further define generating parameters
     OrderGenerator() {
         gen = std::mt19937(std::random_device{}());
-        randPrice = std::uniform_real_distribution<double>(90.0, 110.0);
-        randQty = std::uniform_int_distribution<int>(0, 100);
+        randPrice = std::uniform_real_distribution<double>(10.0, 10010.0);
+        randQty = std::uniform_int_distribution<int>(0, 10000);
         randAct = std::bernoulli_distribution(0.5);
         nextID = 1;
     }
