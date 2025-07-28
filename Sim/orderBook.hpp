@@ -32,10 +32,11 @@ class OrderBook {
     }
 
     //main function to compare Orders
-    void matchOrder (size_t& tradecount){
+    void matchOrder (size_t& tradecount, std::ostream& outStream, bool logEnabled){
         std::lock_guard<std::mutex> lock(mut);
 
         while (!bids.empty() && !asks.empty()){
+
             auto highestBid = bids.begin();
             auto lowestAsks = asks.begin();
 
@@ -45,6 +46,12 @@ class OrderBook {
 
                 tradecount++;
 
+                //trade logging
+                // std::lock_guard<std::mutex> logLock(logMutex);
+                if (logEnabled){
+                    outStream << qty <<  "," << tradePrice << "," << highestBid->second.id << "," << lowestAsks->second.id << std::endl;
+                }
+                
                 highestBid->second.quantity -= qty;
                 lowestAsks->second.quantity -= qty;
 
