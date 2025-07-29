@@ -35,6 +35,7 @@
 ## Comparison Graphs :
 <details>
 <summary><strong>Extend for graphs</strong></summary>
+</details>
 
 
 ## How to build and run :
