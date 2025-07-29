@@ -1,10 +1,20 @@
 # OrderBookSim
 
-- A high performance multithreaded order book simulator with optional logging features
+- **A high performance multithreaded order book simulator with optional logging features**
 - Coded in C++
 - Optimized with local buffers (for logging), thread-safe queues and minimal logging overheads
 - Priority was given to code maintainability
-- Timeline: Completed core system in under 48 hours — from design to optimization.
+- **Timeline: Completed core system in under 48 hours — from design to optimization.**
+
+<details>
+<summary><strong>What is an order book that I am simulating?</strong></summary>
+
+- An order book is a system that matches two groups, the buyer and the seller
+- When the seller sells an item for a price lower than the amount of money the buyer is willing to pay a trade happens
+- The order will decide when a trade happens, record each trade and keep track of buyers and sellers
+- This order can process about 660,000 orders per second and could be even faster if you use a machine with more cores.
+
+</details>
 
 ## Notable Features :
 - Total runtime of O(n log n) where n is the total number of order
@@ -12,7 +22,7 @@
 - Trade matching engine using bids and asks multimap structures
 - Optional logging as a CSV output
 - Simple timer for benchmarking
-- Lock-safe queues for effective concurrency
+- Thread-safe queues for effective concurrency
 
 ## Performance :
 ### Note that all this was implemented with a 4-core machine (hyperthreaded)
@@ -21,6 +31,11 @@
 |------------------|---------|------------|-------------|--------------------|
 | 1,000,000        | Off     | 1.5 sec    | 780,000+    | 660,000 orders/sec |
 | 1,000,000        | On      | 2.5 sec    | 780,000+    | 400,000 orders/sec |
+
+## Comparison Graphs :
+<details>
+<summary><strong>Extend for graphs</strong></summary>
+
 
 ## How to build and run :
 - Pre-requisites : A C++17 compliant compiler (e.g., GCC, Clang)
@@ -34,9 +49,8 @@
 
 ## Code reasonings 
 <details>
-<summary>Click to expand code reasoning</summary>
+<summary><strong>Click to expand code reasoning</strong></summary>
   
-## Code reasonings 
 ### std::multimap
 purpose - maintain order of bids and asks\n
 **why multimap?**
