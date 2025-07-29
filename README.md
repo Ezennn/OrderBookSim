@@ -32,6 +32,7 @@
 - trade logs include quantity of trade, price of trade, Buter ID and seller ID
 - file generated will be called "trades.csv"
 
+## Code reasonings 
 <details>
 <summary>Click to expand code reasoning</summary>
   
