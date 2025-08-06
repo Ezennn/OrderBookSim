@@ -68,7 +68,9 @@ int main(int argc, char* argv[]) {
     timer.begin();
 
     //number of consumer thread (max hardware threads - no.of producer threads)
-    int num_consumers = std::thread::hardware_concurrency() - 1;
+    // int num_consumers = std::thread::hardware_concurrency() - 1; used to access device's max cores
+    //most optimal no. of consumers is 1 because of lock contention.
+    int num_consumers = 2- 1;
     std::mutex logMutex;
 
     //consumer runs (process orders with orderbook) with equal work on each cores
