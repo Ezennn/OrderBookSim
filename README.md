@@ -41,7 +41,7 @@
 ## How to build and run :
 - Pre-requisites : A C++17 compliant compiler (e.g., GCC, Clang)
 - ` g++ main.cpp -std=c++17 -pthread -o OrderBookSim `
-- **WITH LOGGING :** ` ./OrderBookSim --log=true `
+- **WITH LOGGING :** ` ./OrderBookSim --log `
 - **WITHOUT LOGGING :**  ` ./OrderBookSim `
 
 ## Trade logs :
