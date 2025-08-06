@@ -4,7 +4,6 @@
 - Coded in C++
 - Optimized with local buffers (for logging), thread-safe queues and minimal logging overheads
 - Priority was given to code maintainability
-- **Timeline: Completed core system in under 48 hours — from design to optimization.**
 
 <details>
 <summary><strong>What is an order book that I am simulating?</strong></summary>
@@ -27,12 +26,23 @@
 ## Performance :
 ### Note that all this was implemented with a 4-core machine (hyperthreaded)
 ### This implies that the maximum threads used was 8 threads - 1 for producer, 7 for consumers
-| Orders Processed | Logging | Time Taken | Trades Made | Throughput         |
-|------------------|---------|------------|-------------|--------------------|
-| 1,000,000        | Off     | 1.5 sec    | 780,000+    | 660,000 orders/sec |
-| 1,000,000        | On      | 2.5 sec    | 780,000+    | 400,000 orders/sec |
+| Orders Processed | Logging | Time Taken | Trades Made | Throughput             |
+|------------------|---------|------------|-------------|------------------------|
+| 1,000,000        | Off     | 0.80 sec    | 780,000+    | 1,250,0000 orders/sec |
+| 1,000,000        | On      | 1.75 sec    | 780,000+    | 570,000 orders/sec    |
 
 ## Comparison Graphs :
+<img width="683" height="427" alt="Screenshot 2025-08-06 210624" src="https://github.com/user-attachments/assets/eca3d53e-954b-4cbd-b643-7b96aca42678" />
+
+The graph indicates a counterintuitive drop in throughput as the number of threads increases. Instead of scaling linearly or plateauing, performance degrades — a clear sign of contention issues, likely due to:
+- Lock contention on shared resources
+- Inefficient synchronization (e.g., mutexes around critical paths)
+- Potential false sharing or cache thrashing
+
+This behavior is actively being investigated, with profiling tools focused on:
+- Lock wait times
+- Thread blocking statistics
+
 <details>
 <summary><strong>Extend for graphs</strong></summary>
 </details>
@@ -40,9 +50,9 @@
 
 ## How to build and run :
 - Pre-requisites : A C++17 compliant compiler (e.g., GCC, Clang)
-- ` g++ main.cpp -std=c++17 -pthread -o OrderBookSim `
-- **WITH LOGGING :** ` ./OrderBookSim --log `
-- **WITHOUT LOGGING :**  ` ./OrderBookSim `
+- ` g++ main.cpp -std=c++17 -pthread -o orderbooksim `
+- **WITH LOGGING :** ` ./orderbooksim --log `
+- **WITHOUT LOGGING :**  ` ./orderbooksim `
 
 ## Trade logs :
 - trade logs include quantity of trade, price of trade, Buter ID and seller ID
