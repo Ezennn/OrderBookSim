@@ -4,6 +4,12 @@
 #include <mutex>
 #include "order.hpp"
 
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <iostream>
+
+
 //OrderBook Type which introduces addOrder and matchOrder functions
 class OrderBook {
     //inaccessible outside this file

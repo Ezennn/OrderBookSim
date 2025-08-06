@@ -1,0 +1,20 @@
+# Ignore build files
+*.out
+*.o
+*.obj
+*.exe
+*.log
+*.csv
+orderbooksim
+
+# Ignore macOS + Windows crap
+.DS_Store
+Thumbs.db
+
+# Ignore editor stuff
+.vscode/
+.idea/
+*.swp
+
+# Ignore backup files
+*~
