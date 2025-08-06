@@ -95,3 +95,4 @@ This project:
 - Helped me learn about practical trade-offs between performance, and maintainability
   - Particularly tradeoff between having simple, maintainable code, but throughput wouldn't scale with number of threads  
 - Real-world benchmarking and profiling practices
+- Authored by Ezen
