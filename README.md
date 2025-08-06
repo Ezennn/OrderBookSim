@@ -11,7 +11,7 @@
 - An order book is a system that matches two groups, the buyer and the seller
 - When the seller sells an item for a price lower than the amount of money the buyer is willing to pay a trade happens
 - The order will decide when a trade happens, record each trade and keep track of buyers and sellers
-- This order can process about 660,000 orders per second and could be even faster if you use a machine with more cores.
+- This order can process about 1,250,000 orders per second and could be even faster if you use a machine with more cores.
 
 </details>
 
@@ -21,7 +21,6 @@
 - Trade matching engine using bids and asks multimap structures
 - Optional logging as a CSV output
 - Simple timer for benchmarking
-- Thread-safe queues for effective concurrency
 
 ## Performance :
 ### Note that all this was implemented with a 4-core machine (hyperthreaded)
@@ -43,7 +42,7 @@ This behavior is actively being investigated, with profiling tools focused on:
 - Lock wait times
 - Thread blocking statistics.
 
-**Achieved PP99.9 latency of 6 microseconds, even under high load.**
+**Achieved PP99.9 latency of 4 microseconds, even under high load.**
 
 
 ## How to build and run :
@@ -53,7 +52,7 @@ This behavior is actively being investigated, with profiling tools focused on:
 - **WITHOUT LOGGING :**  ` ./orderbooksim `
 
 ## Trade logs :
-- trade logs include quantity of trade, price of trade, Buter ID and seller ID
+- trade logs include quantity of trade, price of trade, Buyer ID and seller ID
 - file generated will be called "trades.csv"
 
 ## Code reasonings 
@@ -69,7 +68,7 @@ purpose - maintain order of bids and asks\n
 - `insert()` is O(log n), `begin()` is O(1), `erase` is O(log n)
 
 ### std::ThreadSafe<Order>
-purpose - store orders from producers until consumer can process them, acting essntially as a buffer.\n
+purpose - store orders from producers until consumer can process them, acting essentially as a buffer.\n
 **why std::queue?**
 - keep processes in O(1)
 - `push()` is O(1) and `pop()` is O(1)
@@ -89,3 +88,10 @@ purpose - single thread buffer for log data to avoid locking every log write.\n
 - Web FrontEnd to visualise project better (A dashboard for example)
 - Make it a live, networked service
 - Log trades in database instead of CSV file
+
+## Why This Project Was Done
+This project:
+- Allowed me to have better understanding of concurrency in C++
+- Helped me learn about practical trade-offs between performance, and maintainability
+  - Particularly tradeoff between having simple, maintainable code, but throughput wouldn't scale with number of threads  
+- Real-world benchmarking and profiling practices
