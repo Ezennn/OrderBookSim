@@ -60,7 +60,7 @@ This behavior is actively being investigated, with profiling tools focused on:
 <summary><strong>Click to expand code reasoning</strong></summary>
   
 ### std::multimap
-purpose - maintain order of bids and asks\n
+purpose - maintain order of bids and asks. \n
 **why multimap?**
 - maintains order based on price of bids and asks
 - supports duplicate price
