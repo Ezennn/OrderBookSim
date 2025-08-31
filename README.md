@@ -60,7 +60,7 @@ This behavior is actively being investigated, with profiling tools focused on:
 <summary><strong>Click to expand code reasoning</strong></summary>
   
 ### std::multimap
-purpose - maintain order of bids and asks. \n
+purpose - maintain order of bids and asks. 
 **why multimap?**
 - maintains order based on price of bids and asks
 - supports duplicate price
@@ -68,14 +68,14 @@ purpose - maintain order of bids and asks. \n
 - `insert()` is O(log n), `begin()` is O(1), `erase` is O(log n)
 
 ### std::ThreadSafe<Order>
-purpose - store orders from producers until consumer can process them, acting essentially as a buffer.\n
+purpose - store orders from producers until consumer can process them, acting essentially as a buffer.
 **why std::queue?**
 - keep processes in O(1)
 - `push()` is O(1) and `pop()` is O(1)
 - FIFO structure (First In First Out) ideal for producer consumer
 
 ### std::stringstream localBuffer
-purpose - single thread buffer for log data to avoid locking every log write.\n
+purpose - single thread buffer for log data to avoid locking every log write.
 **why stringstream?**
 - Logging to disk is slow.
 - Buffering avoids the need to lock std::ofstream so frequently.
